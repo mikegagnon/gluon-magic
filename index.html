@@ -110,10 +110,13 @@
     
     <script type="text/javascript">
 
-      const decks = [
+      const SUITS = ['heart', 'diamond', 'club', 'spade'];
+      const VALS = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
+
+      const DECKS = [
         {
           n: 0,
-          id: 'gluon-spoiler',
+          id: 'gluon_spoiler', // cannot have hyphens in deck id
         },
         {
           n: 1,
@@ -223,7 +226,7 @@
       
 
       function deckClick(n) {
-          DECK = decks[n];
+          DECK = DECKS[n];
           $(`#decks button`).attr('disabled', true);
           $(`#decks button`).removeClass('btn-primary');
           $(`#decks button`).attr('disabled', true);
@@ -247,6 +250,74 @@
         card.valClick(val);
       }
 
+      function getDeckN(deckName) {
+        for (const d of DECKS) {
+          if (d.id === deckName) {
+            return d.n;
+          }
+        }
+        return -1;
+      }
+
+      function loadDeck(parts) {
+        if (parts.length < 1) {
+          console.error('Missing deck name from', parts);
+          return [];
+        }
+        const deckName = parts.shift();
+        console.log('deckName', deckName);
+
+        const deckN = getDeckN(deckName);
+        if (deckN < 0) {
+          console.error('Could not find deck', deckName);
+          return [];
+        }
+        console.log('Clicking deck', deckName);
+        deckClick(deckN);
+
+        while (true) {
+          if (parts.length === 0) {
+            return [];
+          }
+          const head = parts.shift();
+          if (head === 'break') {
+            return [];
+          }
+
+          const c = head.split('_');
+          if (c.length !== 2) {
+            console.error('Could not parse card', c);
+            return [];
+          }
+          const [suit, val] = c;
+          if (c ===)
+        }
+        return parts;
+      }
+
+      function parseUrl(i) {
+          const params = window.location.href.slice(i + 1).split('&');
+          if (params.length !== 1) {
+            console.log('params.length !== 1=== ', params.length);
+            return;
+          }
+          const p = params[0];
+          let parts = p.split('-');
+          
+          while (parts.length > 0) {
+            parts = loadDeck(parts);
+          }
+      }
+
+      function main() {
+          // https://stackoverflow.com/questions/4656843/get-querystring-from-url-using-jquery
+          const i = window.location.href.indexOf('?');
+          if (i >= 0) {
+            parseUrl(i);
+          }
+      }
+
+      main();
       
 
     </script>
