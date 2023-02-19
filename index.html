@@ -138,8 +138,9 @@
         if (i < 0) {
           BASE = window.location.href;
         } else {
-          BASE = window.location.href.slice(i);
+          BASE = window.location.href.slice(0, i);
         }
+        console.log('BASE', BASE);
       }
 
 
@@ -303,6 +304,7 @@
 
       function deckClick(n, noUpdateUrl) {
           DECK = DECKS[n];
+          console.log('DECK_I', DECK_I)
           $(`#decks-${DECK_I} button`).attr('disabled', true);
           $(`#decks-${DECK_I} button`).removeClass('btn-primary');
           $(`#decks-${DECK_I} button`).attr('disabled', true);
@@ -359,6 +361,7 @@
 
 
         URL_PARTS.push('-end');
+        console.log('END:', URL_PARTS)
 
         if (!noUpdateUrl) {
           updateUrl();
