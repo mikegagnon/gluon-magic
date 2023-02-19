@@ -42,6 +42,7 @@
         border: solid rgba(0, 0, 0, .15);
         border-width: 1px 0;
         box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        margin-bottom: 15px; 
       }
 
       .b-example-vr {
@@ -92,7 +93,7 @@
     </div>
   </div>
 
-  <div class="b-example-divider"></div>
+  <!--<div class="b-example-divider"></div>-->
  
 
 </main>
@@ -151,8 +152,13 @@
 
 
       function drawDeckSelector(deckI) {
+        let divider = '';
+        if (deckI > 0) {
+          divider = '<div class="b-example-divider"></div>';
+        }
         const html = `
           <div id="decks-${deckI}" class="not-init">
+            ${divider}
             <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(0)">Gluon Spoiler</button></p>
             <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(1)">Gentle Way of War</button></p>
           </div>
