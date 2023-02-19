@@ -105,6 +105,33 @@
     
     <script type="text/javascript">
 
+      const SUITS = ['heart', 'diamond', 'club', 'spade'];
+      const VALS = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
+
+      const DECKS = [
+        {
+          n: 0,
+          id: 'gluon_spoiler', // cannot have hyphens in deck id
+        },
+        {
+          n: 1,
+          id: 'gentle',
+          cardbottomhtml: `
+            <p><a href="https://www.dropbox.com/s/lpy47qsf7xo1pi2/gentle.pdf?dl=0">PDF</a></p>
+            <p><a href="https://www.lulu.com/shop/magner-redick/the-gentle-way-of-war/paperback/product-4g84q4.html">Paperback</a> $11</p>
+            `,
+          cards: {
+            'heart': {
+              'A': {
+                filenames: ['trimmed/gentle-005.jpg', 'trimmed/gentle-006.jpg'],
+                tophtml: `<h1 class="display-5 fw-bold">Ace of hearts</h1>`,
+                bottomhtml: ``,
+              }
+            }
+          }
+        }
+      ];
+
       let BASE;
       function setBase() {
         const i = window.location.href.indexOf('?');
@@ -133,17 +160,7 @@
 
       }
 
-      function initialize() {
-        console.log('initialize');
-        $(".not-init").remove();
-        setBase();
-        DECK = undefined;
-        CARDS = [];
-        URL_PARTS = []
-        drawDeckSelector();
-      }
-
-      initialize();
+      
 
       // https://stackoverflow.com/questions/8038726/how-to-trigger-change-when-using-the-back-button-with-history-pushstate-and-pops
       function change(state) {
@@ -161,32 +178,7 @@
 
 
 
-      const SUITS = ['heart', 'diamond', 'club', 'spade'];
-      const VALS = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
-
-      const DECKS = [
-        {
-          n: 0,
-          id: 'gluon_spoiler', // cannot have hyphens in deck id
-        },
-        {
-          n: 1,
-          id: 'gentle',
-          cardbottomhtml: `
-            <p><a href="https://www.dropbox.com/s/lpy47qsf7xo1pi2/gentle.pdf?dl=0">PDF</a></p>
-            <p><a href="https://www.lulu.com/shop/magner-redick/the-gentle-way-of-war/paperback/product-4g84q4.html">Paperback</a> $11</p>
-            `,
-          cards: {
-            'heart': {
-              'A': {
-                filenames: ['trimmed/gentle-005.jpg', 'trimmed/gentle-006.jpg'],
-                tophtml: `<h1 class="display-5 fw-bold">Ace of hearts</h1>`,
-                bottomhtml: ``,
-              }
-            }
-          }
-        }
-      ];
+      
 
 
       class CardSelector {
@@ -402,6 +394,7 @@
           }
       }
 
+
       function main() {
           // https://stackoverflow.com/questions/4656843/get-querystring-from-url-using-jquery
           const i = window.location.href.indexOf('?');
@@ -410,7 +403,21 @@
           }
       }
 
-      main();
+
+      function initialize() {
+        console.log('initialize');
+        $(".not-init").remove();
+        setBase();
+        DECK = undefined;
+        CARDS = [];
+        URL_PARTS = []
+        drawDeckSelector();
+        main();
+      }
+
+      initialize();
+
+      
       
 
     </script>
