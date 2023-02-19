@@ -105,6 +105,8 @@
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-3.6.3.min.js"></script>
+
+    
     
     <script type="text/javascript">
 
@@ -119,7 +121,7 @@
           cards: {
             'heart': {
               'A': {
-                filename: 'gentle-005.jpg'
+                filenames: ['trimmed/gentle-005.jpg']
               }
             }
           }
@@ -184,9 +186,12 @@
           console.log(this.val);
           console.log(deck.cards['heart'][this.val]);
           const c = deck.cards[this.suit][this.val];
-          $(`#${this.id}`).append(`
-            <img style="width:100%;" src="img/${c.filename}">
-          `);
+          const mar = "10px;"
+          for (const f of c.filenames) {
+            $(`#${this.id}`).append(`
+              <img style="width:100%; padding-top: ${mar}; padding-left: ${mar}; padding-right: ${mar};" src="img/${f}">
+            `); 
+          }
         }
       }
 
