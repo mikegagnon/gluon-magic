@@ -192,7 +192,7 @@
           if (this.n > 0 || this.n === 0) {
             $(`#cards-${DECK_I}`).append(`
               <div class="not-init end-button" style="margin-bottom: 10px;">
-                <button type="button" class="suit suit-heart btn btn-outline-secondary btn-lg px-4 gap-3" onclick="endDeck(${this.n})">End deck</button>
+                <button type="button" class="end-btn btn btn-outline-secondary btn-lg px-4 gap-3" onclick="endDeck(${this.n})">End deck</button>
               </div>
             `);
           }
@@ -217,6 +217,8 @@
           $(`#${this.id} .suit`).removeClass('btn-dark');
           $(`#${this.id} .suit`).attr('disabled', 'true');
           $(`#${this.id} .suit`).css('border', '0px');
+          $(`.end-btn`).css('border', '0px');
+          $(`.end-btn`).attr('disabled', true);
           if (suit === 'heart' || suit === 'diamond') {
             $(`#${this.id} .suit-${suit}`).addClass('btn-danger');
           } else {
@@ -275,7 +277,12 @@
         }
 
         endDeck() {
-
+          $(`.end-btn`).css('border', '0px');
+          $(`.end-btn`).attr('disabled', true);
+          $(`#${this.id} .suit`).removeClass('btn-danger');
+          $(`#${this.id} .suit`).removeClass('btn-dark');
+          $(`#${this.id} .suit`).attr('disabled', 'true');
+          $(`#${this.id} .suit`).css('border', '0px');
         }
       }
 
