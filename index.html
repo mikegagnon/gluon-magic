@@ -382,7 +382,9 @@
           }
           const head = parts.shift();
           if (head === 'end') {
-            endDeck(cardI);
+            console.log('Clicking end', deckName, parts, cardI);
+
+            endDeck(cardI, true);
             return [parts, cardI];
           }
 
