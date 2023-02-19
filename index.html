@@ -311,6 +311,7 @@
       function deckClick(n, noUpdateUrl) {
           DECK = DECKS[n];
           console.log('DECK_I', DECK_I)
+          $('.deck').css('color', 'rgb(108, 117, 125)');
           
           $(`#decks-${DECK_I} button`).attr('disabled', true);
           $(`#decks-${DECK_I} button`).removeClass('btn-primary');
@@ -318,6 +319,7 @@
           $(`#decks-${DECK_I} button`).addClass('btn-light');
           $(`#decks-${DECK_I} button`).eq(n).removeClass('btn-light');
           $(`#decks-${DECK_I} button`).eq(n).addClass('btn-primary');
+          $(`.btn-primary`).css('color', 'white');
 
           const cardN = CARDS.length;
           const cardSelector = new CardSelector(cardN);
