@@ -158,9 +158,15 @@
 
         suitClick(suit) {
           this.suit = suit;
-          $(`#${this.id} .suit`).css('visibility', 'hidden');
+          $(`#${this.id} .suit`).removeClass('btn-danger');
+          $(`#${this.id} .suit`).removeClass('btn-dark');
           $(`#${this.id} .suit`).attr('disabled', 'true');
-          $(`#${this.id} .suit-${suit}`).css('visibility', 'visible');
+          $(`#${this.id} .suit`).css('border', '0px');
+          if (suit === 'heart' || suit === 'diamond') {
+            $(`#${this.id} .suit-${suit}`).addClass('btn-danger');
+          } else {
+            $(`#${this.id} .suit-${suit}`).addClass('btn-dark');
+          }
           $(`#${this.id}`).append(`
 
         <div class="justify-content-sm-center">
@@ -189,9 +195,10 @@
         valClick(val) {
           this.val = val;
 
-          $(`#${this.id} .val`).css('visibility', 'hidden');
+          $(`#${this.id} .val`).removeClass('btn-warning');
           $(`#${this.id} .val`).attr('disabled', 'true');
-          $(`#${this.id} .val-${this.val}`).css('visibility', 'visible');
+          $(`#${this.id} .val`).css('border', '0px');
+          $(`#${this.id} .val-${this.val}`).addClass('btn-warning');
 
           const deck = DECK;
           console.log(this.val);
