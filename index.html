@@ -334,7 +334,7 @@
         }
       }
 
-      function endDeck(n) {
+      function endDeck(n, noUpdateUrl) {
         const card = CARDS[n];
         card.endDeck();
 
@@ -344,7 +344,7 @@
 
 
 
-        URL_PARTS.push('end');
+        URL_PARTS.push('-end');
 
         if (!noUpdateUrl) {
           updateUrl();
@@ -378,11 +378,12 @@
 
         while (true) {
           if (parts.length === 0) {
-          return [[], undefined];
+            return [[], undefined];
           }
           const head = parts.shift();
-          if (head === 'break') {
-          return [[], undefined];
+          if (head === 'end') {
+            endDeck(cardI);
+            return [parts, cardI];
           }
 
           const c = head.split('_');
