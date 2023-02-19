@@ -313,10 +313,17 @@
           const cardN = CARDS.length;
           const cardSelector = new CardSelector(cardN);
           //console.log(cardSelector);
-          URL_PARTS.push(DECK.id);
+          let deckId;
+          if (n === 0) {
+            deckId = DECK.id
+          } else {
+            deckId = "-" + DECK.id;
+          }
+          URL_PARTS.push(deckId);
           if (!noUpdateUrl) {
             updateUrl();
           }
+          console.log(URL_PARTS)
 
       }
 
