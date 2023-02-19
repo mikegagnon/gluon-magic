@@ -88,12 +88,7 @@
     <h1 class="display-5 fw-bold">Gluon Magic</h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">See also: <a href="https://mikegagnon.github.io/gluon">Gluon Spoiler</a></p>
-      <div id="decks">
-        <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(0)">Gluon Spoiler</button></p>
-        <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(1)">Gentle Way of War</button></p>
-      </div>
-      <div id="cards">
-      </div>
+      <div id="workspace"></div>
     </div>
   </div>
 
@@ -119,10 +114,52 @@
           BASE = window.location.href.slice(i);
         }
       }
-      setBase();
 
 
-      const URL_PARTS = [];
+      let DECK;
+      let CARDS;
+      let URL_PARTS;
+
+
+      function drawDeckSelector() {
+        const html = `
+          <div id="decks" class="not-init">
+            <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(0)">Gluon Spoiler</button></p>
+            <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(1)">Gentle Way of War</button></p>
+          </div>
+          <div id="cards" class="not-init">
+          </div>`;
+        $("#workspace").append(html);
+
+      }
+
+      function initialize() {
+        console.log('initialize');
+        $(".not-init").remove();
+        setBase();
+        DECK = undefined;
+        CARDS = [];
+        URL_PARTS = []
+        drawDeckSelector();
+      }
+
+      initialize();
+
+      // https://stackoverflow.com/questions/8038726/how-to-trigger-change-when-using-the-back-button-with-history-pushstate-and-pops
+      function change(state) {
+          if(state === null) { // initial page
+              //$("div").text("Original");
+              console.log('initial')
+              initialize();
+          } else { // page added with pushState
+              console.log(state.url);
+          }
+      }
+      $(window).on("popstate", function(e) {
+          change(e.originalEvent.state);
+      });
+
+
 
       const SUITS = ['heart', 'diamond', 'club', 'spade'];
       const VALS = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
@@ -151,8 +188,6 @@
         }
       ];
 
-      let DECK;
-      const CARDS = [];
 
       class CardSelector {
         constructor(n) {
@@ -161,7 +196,7 @@
           this.id = "card-selector-" + this.n;
           $("#cards").append(`
 
-      <div id="${this.id}">
+      <div class="not-init" id="${this.id}">
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <p>
             <button type="button" class="suit suit-heart btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'heart')">♥</button>
@@ -186,7 +221,7 @@
           }
           $(`#${this.id}`).append(`
 
-        <div class="justify-content-sm-center">
+        <div class="justify-content-sm-center not-init">
           <p>
             <button type="button" class="val val-A btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 'A')">A</button>
             <button type="button" class="val val-K btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 'K')">K</button>
