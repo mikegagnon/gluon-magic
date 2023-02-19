@@ -281,6 +281,10 @@
           $(`#${this.id}`).append(c.bottomhtml);
           $(`#${this.id}`).append(deck.cardbottomhtml);
 
+          const cardN = CARDS.length;
+          const cardSelector = new CardSelector(cardN);
+
+
         }
 
         endDeck() {
