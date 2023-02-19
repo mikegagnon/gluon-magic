@@ -133,12 +133,25 @@
           $(`#${this.id} .suit-${suit}`).css('visibility', 'visible');
           $(`#${this.id}`).append(`
 
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <div class="justify-content-sm-center">
           <p>
-            <button type="button" class="suit suit-heart btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'heart')">♥</button>
-            <button type="button" class="suit suit-diamond btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'diamond')">♦</button>
-            <button type="button" class="suit suit-club btn btn-dark btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'club')">♣</button>
-            <button type="button" class="suit suit-spade btn btn-dark btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'spade')">♠</button>
+            <button type="button" class="suit suit-heart btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 'A')">A</button>
+            <button type="button" class="suit suit-diamond btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 'K')">K</button>
+            <button type="button" class="suit suit-club btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 'Q')">Q</button>
+            <button type="button" class="suit suit-spade btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 'J')">J</button>
+          </p>
+          <p>
+            <button type="button" class="suit suit-heart btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 10)">10</button>
+            <button type="button" class="suit suit-diamond btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 9)">9</button>
+            <button type="button" class="suit suit-club btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 8)">8</button>
+            <button type="button" class="suit suit-spade btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 7)">7</button>
+          </p>
+          <p>
+            <button type="button" class="suit suit-heart btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 6)">6</button>
+            <button type="button" class="suit suit-diamond btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 5)">5</button>
+            <button type="button" class="suit suit-club btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 4)">4</button>
+            <button type="button" class="suit suit-spade btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 3)">3</button>
+            <button type="button" class="suit suit-spade btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 2)">2</button>
           </p>
         </div>`);
 
