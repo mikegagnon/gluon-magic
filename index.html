@@ -154,8 +154,10 @@
             <button type="button" class="suit suit-spade btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 2)">2</button>
           </p>
         </div>`);
+        }
 
-
+        valClick(val) {
+          
         }
       }
 
@@ -187,6 +189,11 @@
         const card = CARDS[n];
         //console.log(card.id, suit);
         card.suitClick(suit);
+      }
+
+      function valClick(n, val) {
+        const card = CARDS[n];
+        card.valClick(n, val);
       }
 
       
