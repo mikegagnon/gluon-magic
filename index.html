@@ -170,6 +170,7 @@
               initialize();
           } else { // page added with pushState
               console.log(state.url);
+              initialize();
           }
       }
       $(window).on("popstate", function(e) {
@@ -404,13 +405,14 @@
       }
 
 
+      setBase();
+
       function initialize() {
         console.log('initialize');
         $(".not-init").remove();
-        setBase();
         DECK = undefined;
         CARDS = [];
-        URL_PARTS = []
+        URL_PARTS = [];
         drawDeckSelector();
         main();
       }
