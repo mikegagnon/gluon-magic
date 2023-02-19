@@ -118,14 +118,13 @@
         {
           n: 1,
           id: 'gentle',
+          cardbottomhtml: `<p>2</p>`,
           cards: {
             'heart': {
               'A': {
-                filenames: ['trimmed/gentle-005.jpg'],
-                html: `
-                  <h1 class="display-5 fw-bold">Ace of hearts</h1>
-
-                `
+                filenames: ['trimmed/gentle-005.jpg', 'trimmed/gentle-006.jpg'],
+                tophtml: `<h1 class="display-5 fw-bold">Ace of hearts</h1>`,
+                bottomhtml: `<p>1</p>`,
               }
             }
           }
@@ -195,13 +194,19 @@
           console.log(this.val);
           console.log(deck.cards['heart'][this.val]);
           const c = deck.cards[this.suit][this.val];
+          
+          $(`#${this.id}`).append(c.tophtml);
           const mar = "10px;"
+
           for (const f of c.filenames) {
             $(`#${this.id}`).append(`
-              ${c.html}
               <img style="width:100%; padding-top: ${mar}; padding-left: ${mar}; padding-right: ${mar};" src="img/${f}">
             `); 
           }
+
+          $(`#${this.id}`).append(c.bottomhtml);
+          $(`#${this.id}`).append(deck.cardbottomhtml);
+
         }
       }
 
