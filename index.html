@@ -89,6 +89,7 @@
     <h1 class="display-5 fw-bold">Gluon Magic</h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">See also: <a href="https://mikegagnon.github.io/gluon">Gluon Spoiler</a></p>
+
       <div id="workspace"></div>
       <div class="b-example-divider" style="margin-bottom: 40px; margin-top: 40px;"></div>
 
@@ -122,10 +123,28 @@
         {
           n: 0,
           id: 'gluon_spoiler', // cannot have hyphens in deck id
+          deckTop: `
+            <h1>Gluon Spoiler</h1>
+            <p><a href="https://mikegagnon.github.io/gluon/">Online book</a></p>
+            <p>Trailer:</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/2tBC-aHbeHg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
+          cardbottomhtml:
+            `<p><a href="https://mikegagnon.github.io/gluon/">Online book</a></p>
+            `,
+          cards: {
+            'spade': {
+              'A': {
+                filenames: [],
+                tophtml: `<h1 class="display-5 fw-bold">Ace of spades</h1>`,
+                bottomhtml: ``,
+              }
+            }
+          }
         },
         {
           n: 1,
           id: 'gentle',
+          deckTop: `<h1>The Gentle Way of War</h1>`,
           cardbottomhtml: `
             <p><a href="https://www.dropbox.com/s/lpy47qsf7xo1pi2/gentle.pdf?dl=0">PDF</a></p>
             <p><a href="https://www.lulu.com/shop/magner-redick/the-gentle-way-of-war/paperback/product-4g84q4.html">Paperback</a> $11</p>
@@ -180,6 +199,8 @@
             ${divider}
             <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(0)">Gluon Spoiler</button></p>
             <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(1)">Gentle Way of War</button></p>
+          </div>
+          <div id="deckTop-${deckI}" class="not-init">
           </div>
           <div id="cards-${deckI}" class="not-init">
           </div>`;
@@ -285,7 +306,6 @@
 
           const deck = DECK;
           console.log(this.val);
-          console.log(deck.cards['heart'][this.val]);
           const c = deck.cards[this.suit][this.val];
           
           $(`#${this.id}`).append(c.tophtml);
@@ -360,7 +380,9 @@
           if (!noUpdateUrl) {
             updateUrl();
           }
-          console.log(URL_PARTS)
+          console.log(URL_PARTS);
+
+          $(`#deckTop-${DECK_I}`).append(DECK.deckTop);
 
       }
 
