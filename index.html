@@ -337,6 +337,13 @@
       function endDeck(n) {
         const card = CARDS[n];
         card.endDeck();
+
+
+        DECK_I++;
+        drawDeckSelector(DECK_I);
+
+
+
         URL_PARTS.push('end');
 
         if (!noUpdateUrl) {
