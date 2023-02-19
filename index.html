@@ -107,6 +107,45 @@
     <script src="js/jquery-3.6.3.min.js"></script>
     
     <script type="text/javascript">
+      class CardSelector {
+        constructor(n) {
+          CARDS.push(this);
+          this.n = n;
+          this.id = "card-selector-" + this.n;
+          $("#cards").append(`
+
+      <div id="${this.id}">
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <p>
+            <button type="button" class="suit suit-heart btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'heart')">♥</button>
+            <button type="button" class="suit suit-diamond btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'diamond')">♦</button>
+            <button type="button" class="suit suit-club btn btn-dark btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'club')">♣</button>
+            <button type="button" class="suit suit-spade btn btn-dark btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'spade')">♠</button>
+          </p>
+        </div>
+      </div>`);
+        }
+
+        suitClick(suit) {
+          this.suit = suit;
+          $(`#${this.id} .suit`).css('visibility', 'hidden');
+          $(`#${this.id} .suit`).attr('disabled', 'true');
+          $(`#${this.id} .suit-${suit}`).css('visibility', 'visible');
+          $(`#${this.id}`).append(`
+
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <p>
+            <button type="button" class="suit suit-heart btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'heart')">♥</button>
+            <button type="button" class="suit suit-diamond btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'diamond')">♦</button>
+            <button type="button" class="suit suit-club btn btn-dark btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'club')">♣</button>
+            <button type="button" class="suit suit-spade btn btn-dark btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'spade')">♠</button>
+          </p>
+        </div>`);
+
+
+        }
+      }
+
       const decks = [
         {
           n: 0,
@@ -116,7 +155,6 @@
 
       let DECK;
       const CARDS = [];
-
 
       function deckClick(n) {
           DECK = decks[n];
@@ -128,13 +166,9 @@
           $(`#decks button`).eq(n).addClass('btn-primary');
 
           const cardN = CARDS.length;
-          const firstCardSelector = new CardSelector(cardN);
+          const cardSelector = new CardSelector(cardN);
 
       }
-    </script>
-
-    <script type="text/javascript">
-
 
       function suitClick(n, suit) {
         const card = CARDS[n];
@@ -142,32 +176,7 @@
         card.suitClick(suit);
       }
 
-      class CardSelector {
-        constructor(n) {
-          CARDS.push(this);
-          this.n = n;
-          this.id = "card-selector-" + this.n;
-          $("#cards").append(`
-
-      <div id="${this.id}">
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <div>
-            <button type="button" class="suit suit-heart btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'heart')">♥</button>
-            <button type="button" class="suit suit-diamond btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'diamond')">♦</button>
-            <button type="button" class="suit suit-club btn btn-dark btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'club')">♣</button>
-            <button type="button" class="suit suit-spade btn btn-dark btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'spade')">♠</button>
-          </div>
-        </div>
-      </div>`);
-        }
-
-        suitClick(suit) {
-          $(`#${this.id} .suit`).css('visibility', 'hidden');
-          $(`#${this.id} .suit`).attr('disabled', 'true');
-          $(`#${this.id} .suit-${suit}`).css('visibility', 'visible');
-
-        }
-      }
+      
 
     </script>
 
