@@ -251,11 +251,11 @@
           const c = deck.cards[this.suit][this.val];
           
           $(`#${this.id}`).append(c.tophtml);
-          const mar = "10px;"
+          const mar = "15px;"
 
           for (const f of c.filenames) {
             $(`#${this.id}`).append(`
-              <img style="width:100%; padding-top: ${mar}; padding-left: ${mar}; padding-right: ${mar};" src="img/${f}">
+              <img class="rounded shadow" style="width:100%; padding-top: ${mar}; padding-left: ${mar}; padding-right: ${mar}; padding-bottom: ${mar}; margin-bottom: ${mar}" src="img/${f}">
             `); 
           }
 
