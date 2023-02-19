@@ -271,6 +271,10 @@
           $(`#${this.id}`).append(deck.cardbottomhtml);
 
         }
+
+        endDeck() {
+          
+        }
       }
 
       function updateUrl() {
@@ -322,6 +326,16 @@
         const card = CARDS[n];
         card.valClick(val);
         URL_PARTS.push('_' + val);
+
+        if (!noUpdateUrl) {
+          updateUrl();
+        }
+      }
+
+      function endDeck(n) {
+        const card = CARDS[n];
+        card.endDeck();
+        URL_PARTS.push('end');
 
         if (!noUpdateUrl) {
           updateUrl();
