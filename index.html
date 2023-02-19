@@ -115,6 +115,8 @@
       ];
 
       let DECK;
+      const CARDS = [];
+
 
       function deckClick(n) {
           DECK = decks[n];
@@ -125,12 +127,14 @@
           $(`#decks button`).eq(n).removeClass('btn-light');
           $(`#decks button`).eq(n).addClass('btn-primary');
 
+          const cardN = CARDS.length;
+          const firstCardSelector = new CardSelector(cardN);
+
       }
     </script>
 
     <script type="text/javascript">
 
-      const CARDS = [];
 
       function suitClick(n, suit) {
         const card = CARDS[n];
@@ -168,7 +172,6 @@
     </script>
 
     <script type="text/javascript">
-      const firstCardSelector = new CardSelector(0);
     </script>
 
       
