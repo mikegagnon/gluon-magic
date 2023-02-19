@@ -343,7 +343,7 @@
         //console.log(card.id, suit);
         card.suitClick(suit);
         URL_PARTS.push('-' + suit);
-
+        console.log("suitClick DECK_I", DECK_I);
         if (!noUpdateUrl) {
           //updateUrl();
         }
@@ -411,6 +411,8 @@
             console.log('Clicking end', deckName, parts, cardI);
 
             endDeck(cardI, true);
+            cardI++;
+
             return [parts, cardI];
           }
 
