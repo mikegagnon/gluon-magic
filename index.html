@@ -77,10 +77,23 @@
     
     <!-- Custom styles for this template -->
     <link href="css/heroes.css" rel="stylesheet">
+
+
   </head>
   <body>
     
 <main>
+
+    <div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold">Gluon Magic</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">See also: <a href="https://mikegagnon.github.io/gluon">Gluon Spoiler</a></p>
+      <div id="cards">
+      </div>
+    </div>
+  </div>
+
+  <div class="b-example-divider"></div>
  
 
 </main>
@@ -88,6 +101,48 @@
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-3.6.3.min.js"></script>
+    <script type="text/javascript">
+
+      const CARDS = [];
+
+      function suitClick(n, suit) {
+        const card = CARDS[n];
+        //console.log(card.id, suit);
+        card.suitClick(suit);
+      }
+
+      class CardSelector {
+        constructor(n) {
+          CARDS.push(this);
+          this.n = n;
+          this.id = "card-selector-" + this.n;
+          $("#cards").append(`
+
+      <div id="${this.id}">
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <div>
+            <button type="button" class="suit suit-heart btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'heart')">♥</button>
+            <button type="button" class="suit suit-diamond btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'diamond')">♦</button>
+            <button type="button" class="suit suit-club btn btn-dark btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'club')">♣</button>
+            <button type="button" class="suit suit-spade btn btn-dark btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'spade')">♠</button>
+          </div>
+        </div>
+      </div>`);
+        }
+
+        suitClick(suit) {
+          $(`#${this.id} .suit`).css('visibility', 'hidden');
+          $(`#${this.id} .suit`).attr('disabled', 'true');
+          $(`#${this.id} .suit-${suit}`).css('visibility', 'visible');
+
+        }
+      }
+
+    </script>
+
+    <script type="text/javascript">
+      const firstCardSelector = new CardSelector(0);
+    </script>
 
       
   </body>
