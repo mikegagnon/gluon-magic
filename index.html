@@ -144,17 +144,18 @@
 
 
       let DECK;
+      let DECK_I;
       let CARDS;
       let URL_PARTS;
 
 
-      function drawDeckSelector() {
+      function drawDeckSelector(deckI) {
         const html = `
-          <div id="decks" class="not-init">
+          <div id="decks-${deckI}" class="not-init">
             <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(0)">Gluon Spoiler</button></p>
             <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(1)">Gentle Way of War</button></p>
           </div>
-          <div id="cards" class="not-init">
+          <div id="cards-${deckI}" class="not-init">
           </div>`;
         $("#workspace").append(html);
 
@@ -187,15 +188,16 @@
           CARDS.push(this);
           this.n = n;
           this.id = "card-selector-" + this.n;
+          console.log(`#cards-${DECK_I}`);
           if (this.n > 0 || this.n === 0) {
-            $("#cards").append(`
+            $(`#cards-${DECK_I}`).append(`
               <div class="not-init end-button" style="margin-bottom: 10px;">
                 <button type="button" class="suit suit-heart btn btn-outline-secondary btn-lg px-4 gap-3" onclick="endDeck(${this.n})">End deck</button>
               </div>
             `);
           }
 
-          $("#cards").append(`
+          $(`#cards-${DECK_I}`).append(`
 
       <div class="not-init" id="${this.id}">
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -273,7 +275,7 @@
         }
 
         endDeck() {
-          
+
         }
       }
 
@@ -294,16 +296,16 @@
 
       function deckClick(n, noUpdateUrl) {
           DECK = DECKS[n];
-          $(`#decks button`).attr('disabled', true);
-          $(`#decks button`).removeClass('btn-primary');
-          $(`#decks button`).attr('disabled', true);
-          $(`#decks button`).addClass('btn-light');
-          $(`#decks button`).eq(n).removeClass('btn-light');
-          $(`#decks button`).eq(n).addClass('btn-primary');
+          $(`#decks-${DECK_I} button`).attr('disabled', true);
+          $(`#decks-${DECK_I} button`).removeClass('btn-primary');
+          $(`#decks-${DECK_I} button`).attr('disabled', true);
+          $(`#decks-${DECK_I} button`).addClass('btn-light');
+          $(`#decks-${DECK_I} button`).eq(n).removeClass('btn-light');
+          $(`#decks-${DECK_I} button`).eq(n).addClass('btn-primary');
 
           const cardN = CARDS.length;
           const cardSelector = new CardSelector(cardN);
-
+          //console.log(cardSelector);
           URL_PARTS.push(DECK.id);
           if (!noUpdateUrl) {
             updateUrl();
@@ -435,7 +437,8 @@
         DECK = undefined;
         CARDS = [];
         URL_PARTS = [];
-        drawDeckSelector();
+        DECK_I = 0;
+        drawDeckSelector(DECK_I);
         main();
       }
 
