@@ -107,6 +107,28 @@
     <script src="js/jquery-3.6.3.min.js"></script>
     
     <script type="text/javascript">
+
+      const decks = [
+        {
+          n: 0,
+          id: 'gluon-spoiler',
+        },
+        {
+          n: 1,
+          id: 'gentle',
+          cards: {
+            'heart': {
+              'A': {
+                filename: 'gentle-005.jpg'
+              }
+            }
+          }
+        }
+      ];
+
+      let DECK;
+      const CARDS = [];
+
       class CardSelector {
         constructor(n) {
           CARDS.push(this);
@@ -157,19 +179,18 @@
         }
 
         valClick(val) {
-          
+          this.val = val;
+          const deck = DECK;
+          console.log(this.val);
+          console.log(deck.cards['heart'][this.val]);
+          const c = deck.cards[this.suit][this.val];
+          $(`#${this.id}`).append(`
+            <img style="width:100%;" src="img/${c.filename}">
+          `);
         }
       }
 
-      const decks = [
-        {
-          n: 0,
-          id: 'gentle'
-        }
-      ];
-
-      let DECK;
-      const CARDS = [];
+      
 
       function deckClick(n) {
           DECK = decks[n];
@@ -193,7 +214,7 @@
 
       function valClick(n, val) {
         const card = CARDS[n];
-        card.valClick(n, val);
+        card.valClick(val);
       }
 
       
