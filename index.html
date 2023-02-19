@@ -154,6 +154,27 @@
       </div>
                 `,
                 bottomhtml: ``,
+              },
+              '2': {
+                filenames: ['misc/harvard-transcript.png'],
+                tophtml: `<h1 class="display-5 fw-bold">2 of spades</h1>
+                <h3>Harvard</h3>
+
+                <div style="text-align: left">
+
+                <p style="font-size: 80%;">From the online book <a href="https://mikegagnon.github.io/gluon/index.html#i-once">Gluon Spoiler</a>:</p>
+      <p class="lead mb-4">I once hacked the United States nuclear-warfare defense system, during a live-fire war game (<a href="https://mikegagnon.github.io/gluon/index.html#zbg">ZBG</a> <a href="img/zbg/zbg-233-219.jpg">pg. 219</a>).</p>
+
+      <p class="lead mb-4">Proof that the war game was <i>live fire</i>: see pages 20 and 34 of <a href="https://www.dropbox.com/sh/w88813zihcygbze/AADd8n7FoF-O6HGd74kpiVXWa/Annual_Report_2010.pdf?dl=0">MIT Lincoln Laboratory's 2010 report</a>.
+      </p>
+
+      <img src="file:///Users/mng/Documents/gluon-spoiler/web/img/annual.jpg" style="width:100%; margin: 30px;" alt="todo">
+      
+
+      <p class="lead mb-4">I authored an unclassified report on that war game titled <a href="https://www.dropbox.com/sh/w88813zihcygbze/AAAbKi4dPhA9DqFoyj0gbPGqa/isarcs.pdf?dl=0">Towards Net-Centric Cyber Survivability for Ballistic Missile Defense</a>.
+      </div>
+                `,
+                bottomhtml: ``,
               }
             }
           }
@@ -330,7 +351,7 @@
 
           for (const f of c.filenames) {
             $(`#${this.id}`).append(`
-              <img class="rounded shadow" style="width:100%; padding-top: ${mar}; padding-left: ${mar}; padding-right: ${mar}; padding-bottom: ${mar}; margin-bottom: ${mar}" src="img/${f}">
+              <a href="img/${f}"><img class="rounded shadow" style="width:100%; padding-top: ${mar}; padding-left: ${mar}; padding-right: ${mar}; padding-bottom: ${mar}; margin-bottom: ${mar}" src="img/${f}"></a>
             `); 
           }
 
