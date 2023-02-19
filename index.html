@@ -90,6 +90,14 @@
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">See also: <a href="https://mikegagnon.github.io/gluon">Gluon Spoiler</a></p>
       <div id="workspace"></div>
+      <div class="b-example-divider" style="margin-bottom: 40px; margin-top: 40px;"></div>
+
+      <div>
+        <center>
+          Link to this page:<br>
+          <div id="myqrcode"></div>
+        </center>
+      </div>
     </div>
   </div>
 
@@ -101,6 +109,7 @@
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-3.6.3.min.js"></script>
+    <script src="js/qrcode.min.js"></script>
 
     
     
@@ -149,6 +158,16 @@
       let DECK_I;
       let CARDS;
       let URL_PARTS;
+
+      // https://davidshimjs.github.io/qrcodejs/
+      const QRCODE = new QRCode("myqrcode", {
+          text: window.location.href,
+          width: 256,
+          height: 256,
+          colorDark : "#000000",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.L
+      });
 
 
       function drawDeckSelector(deckI) {
@@ -309,6 +328,9 @@
         //window.location.href = newUrl;
         //window.history.pushState("object or string", "Title", "/new-url");
         window.history.pushState({}, '', newUrl);
+
+        QRCODE.clear(); // clear the code.
+        QRCODE.makeCode(newUrl);
       }
 
 
