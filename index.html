@@ -259,10 +259,10 @@
         return -1;
       }
 
-      function loadDeck(parts) {
+      function loadDeck(parts, deckI, cardI) {
         if (parts.length < 1) {
           console.error('Missing deck name from', parts);
-          return [];
+          return [[], undefined];
         }
         const deckName = parts.shift();
         console.log('deckName', deckName);
@@ -270,29 +270,42 @@
         const deckN = getDeckN(deckName);
         if (deckN < 0) {
           console.error('Could not find deck', deckName);
-          return [];
+          return [[], undefined];
         }
         console.log('Clicking deck', deckName);
         deckClick(deckN);
 
         while (true) {
           if (parts.length === 0) {
-            return [];
+          return [[], undefined];
           }
           const head = parts.shift();
           if (head === 'break') {
-            return [];
+          return [[], undefined];
           }
 
           const c = head.split('_');
           if (c.length !== 2) {
             console.error('Could not parse card', c);
-            return [];
+            return [[], undefined];
           }
           const [suit, val] = c;
-          if (c ===)
+          if (!SUITS.includes(suit)) {
+            console.error('Bad suit', c);
+            return [[], undefined];
+          }
+          if (!VALS.includes(val)) {
+            console.error('Bad val', c);
+            return [[], undefined];
+          }
+
+          console.log('Clicking', cardI, suit, val);
+
+          suitClick(cardI, suit);
+          valClick(cardI, val);
+          cardI++;
         }
-        return parts;
+        return [parts, cardI];
       }
 
       function parseUrl(i) {
@@ -303,9 +316,12 @@
           }
           const p = params[0];
           let parts = p.split('-');
-          
+          let deckI = 0;
+          let cardI = 0;
+
           while (parts.length > 0) {
-            parts = loadDeck(parts);
+            [parts, cardI] = loadDeck(parts, deckI, cardI);
+            deckI++;
           }
       }
 
