@@ -280,10 +280,10 @@
         endDeck() {
           $(`.end-btn`).css('border', '0px');
           $(`.end-btn`).attr('disabled', true);
-          $(`#${this.id} .suit`).removeClass('btn-danger');
-          $(`#${this.id} .suit`).removeClass('btn-dark');
-          $(`#${this.id} .suit`).attr('disabled', 'true');
-          $(`#${this.id} .suit`).css('border', '0px');
+          $(`.suit`).removeClass('btn-danger');
+          $(`.suit`).removeClass('btn-dark');
+          $(`.suit`).attr('disabled', 'true');
+          $(`.suit`).css('border', '0px');
         }
       }
 
