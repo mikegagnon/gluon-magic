@@ -378,6 +378,24 @@
           </p>
         </div>
       </div>`);
+
+          //this.disableSuit(DECK_I, 'club');
+          const deck = DECK;
+          for (const suit of SUITS) {
+            if (!(suit in deck.cards)) {
+              this.disableSuit(DECK_I, suit);
+            } 
+          }
+
+        }
+
+        disableSuit(deckI, suit) {
+
+          $(`#cards-${deckI} .suit-${suit}`).attr('disabled', true);
+          $(`#cards-${deckI} .suit-${suit}`).removeClass('btn-danger');
+          $(`#cards-${deckI} .suit-${suit}`).removeClass('btn-dark');
+          $(`#cards-${deckI} .suit-${suit}`).css('border', '0px');
+
         }
 
         suitClick(suit) {
@@ -416,6 +434,20 @@
             <button type="button" class="val val-2 btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 2)">2</button>
           </p>
         </div>`);
+
+          const deck = DECK;
+          for (const val of VALS) {
+            if (!(val in deck.cards[this.suit])) {
+              this.disableVal(val);
+            } 
+          }
+        }
+
+        disableVal(val) {
+          $(`#${this.id} .val-${val}`).attr('disabled', true);
+          $(`#${this.id} .val-${val}`).removeClass('btn-warning');
+          $(`#${this.id} .val-${val}`).css('border', '0px');
+
         }
 
         valClick(val) {
