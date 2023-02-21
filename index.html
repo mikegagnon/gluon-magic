@@ -95,10 +95,11 @@
       <p class="lead mb-4">See also: <a href="https://mikegagnon.github.io/gluon">Gluon Spoiler</a></p>
 
       <div id="workspace"></div>
-      <div class="b-example-divider" style="margin-bottom: 40px; margin-top: 40px;"></div>
+      <!--<div class="b-example-divider" style="margin-bottom: 40px; margin-top: 40px;"></div>-->
 
       <div>
         <center>
+          <br><br><br><br>
           Link to this page:<br>
           <div id="myqrcode"></div>
           <p style="margin-top: 100px;"><a href="index.html">Start over</a></p>
@@ -125,7 +126,7 @@
       const VALS = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'JR', 'JB'];
 
       const DECKS = [
-        {
+        /*{
           n: 0,
           id: 'gluon_spoiler', // cannot have hyphens in deck id
           deckTop: `
@@ -265,9 +266,9 @@
               },
             }
           }
-        },
+        },*/
         {
-          n: 1,
+          n: 0,
           id: 'theory11',
           deckTop: `<h1>Theory 11</h1>`,
           cardbottomhtml: `
@@ -456,6 +457,28 @@
               },
             },
             'club': {
+              '6': {
+                filenames: [],
+                tophtml: `<h1 class="display-5 fw-bold">6 of clubs</h1>
+                <h3>JavaScript: Overview & Details</h3>
+                <div style="text-align: left">
+                <p>The online book <a href="https://mikegagnon.github.io/gluon/index.html#js">JavaScript: Overview & Details</a> teaches computer science to novices.</p>
+                </div>
+                `,
+                bottomhtml: ``,
+              },
+              '10': {
+                filenames: [],
+                tophtml: `<h1 class="display-5 fw-bold">10 of clubs</h1>
+                <h3>Gluon Spoiler</h3>
+                <div style="text-align: left">
+                <p>The online book <a href="https://mikegagnon.github.io/gluon/">Gluon Spoiler</a> is a spoiler for my other books, because it resolves the mysteries I sewed into my other books.<br><br>
+                  
+                  In Gluon Spoiler, I make my intellectual canon as simple and clear as possible, by providing entertaining references to my other books.</p>
+                </div>
+                `,
+                bottomhtml: ``,
+              },
               'J': {
                 filenames: [],
                 tophtml: `<h1 class="display-5 fw-bold">Jack of clubs</h1>
@@ -631,21 +654,33 @@
 
 
       function drawDeckSelector(deckI) {
+
         let divider = '';
         if (deckI > 0) {
           divider = '<div class="b-example-divider"></div>';
         }
-        const html = `
+
+        let preamble = `
           <div id="decks-${deckI}" class="not-init">
             ${divider}
             <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(0)">Gluon Spoiler</button></p>
             <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(1)">Theory 11</button></p>
-          </div>
+          </div>`;
+        
+        if (DECKS.length == 1) {
+          preamble = '';
+        }
+
+        
+        const html = `
+          ${preamble}
           <div id="deckTop-${deckI}" class="not-init">
           </div>
           <div id="cards-${deckI}" class="not-init">
           </div>`;
         $("#workspace").append(html);
+
+        //console.log(html)
 
       }
 
@@ -678,11 +713,13 @@
           this.id = "card-selector-" + this.n;
           console.log(`#cards-${DECK_I}`);
           if (this.n > 0 || this.n === 0) {
-            $(`#cards-${DECK_I}`).append(`
-              <div class="not-init end-button" style="margin-bottom: 10px;">
-                <button type="button" class="end-btn btn btn-outline-secondary btn-lg px-4 gap-3" onclick="endDeck(${this.n})">End deck</button>
-              </div>
-            `);
+            if (DECKS.length > 1) {
+              $(`#cards-${DECK_I}`).append(`
+                <div class="not-init end-button" style="margin-bottom: 10px;">
+                  <button type="button" class="end-btn btn btn-outline-secondary btn-lg px-4 gap-3" onclick="endDeck(${this.n})">End deck</button>
+                </div>
+              `);
+            }
           }
 
           $(`#cards-${DECK_I}`).append(`
@@ -880,7 +917,9 @@
           }
           console.log(URL_PARTS);
 
-          $(`#deckTop-${DECK_I}`).append(DECK.deckTop);
+          if (DECKS.length > 1) {
+            $(`#deckTop-${DECK_I}`).append(DECK.deckTop);
+          }
 
       }
 
@@ -1001,6 +1040,8 @@
             [parts, cardI] = loadDeck(parts, deckI, cardI);
             deckI++;
           }
+
+          return parts.length
       }
 
 
@@ -1008,8 +1049,9 @@
           // https://stackoverflow.com/questions/4656843/get-querystring-from-url-using-jquery
           const i = window.location.href.indexOf('?');
           if (i >= 0) {
-            parseUrl(i);
+            return parseUrl(i);
           }
+          return -1;
       }
 
 
@@ -1023,7 +1065,11 @@
         URL_PARTS = [];
         DECK_I = 0;
         drawDeckSelector(DECK_I);
-        main();
+        const partsLength = main();
+
+        if (DECKS.length === 1 && partsLength < 0) {
+          deckClick(0);
+        }
       }
 
       initialize();
