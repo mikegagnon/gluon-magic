@@ -306,6 +306,18 @@
                 bottomhtml: `
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/cpF9z0BrMxo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
               },
+              '7': {
+                filenames: [],
+                tophtml: `<h1 class="display-5 fw-bold">7 of hearts</h1>
+                <h3>Drive from Crestone (full)</h3>
+                <div style="text-align: left">
+                <p>On February 18, 2023, I drove from Crestone, CO to Fort Collins, CO, and recorded
+                some video diary entries.</p>
+                </div>
+                `,
+                bottomhtml: `
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/qXTkXkAb8Gs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
+              },
               '10': {
                 filenames: [],
                 tophtml: `<h1 class="display-5 fw-bold">10 of hearts</h1>
@@ -331,6 +343,26 @@
                 `,
                 bottomhtml: `
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/SoAQBkeicOQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
+              },
+              'Q': {
+                filenames: [],
+                tophtml: `<h1 class="display-5 fw-bold">Queen of hearts</h1>
+                <h3>Endless Lullaby</h3>
+                <div style="text-align: left">
+                <p>The beginning of an endless lullaby I wrote for The Dakini (see Ace of diamonds and 2 of spades).</p>
+                </div>
+                `,
+                bottomhtml: `<iframe width="560" height="315" src="https://www.youtube.com/embed/zqAcsoEDgm0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
+              },
+              'A': {
+                filenames: [],
+                tophtml: `<h1 class="display-5 fw-bold">Ace of hearts</h1>
+                <h3>Raska Lullaby</h3>
+                <div style="text-align: left">
+                <p>Just some poetic gibberish.</p>
+                </div>
+                `,
+                bottomhtml: `<iframe width="560" height="315" src="https://www.youtube.com/embed/4IxMX3XTp8Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
               },
             },
             'diamond': {
@@ -653,6 +685,7 @@
           $(`#${this.id} .val-${val}`).attr('disabled', true);
           $(`#${this.id} .val-${val}`).removeClass('btn-warning');
           $(`#${this.id} .val-${val}`).removeClass('btn-danger');
+          console.log(`#${this.id} .val-${val}`);
           $(`#${this.id} .val-${val}`).removeClass('btn-dark');
           $(`#${this.id} .val-${val}`).css('border', '0px');
 
@@ -666,9 +699,16 @@
           }
 
           $(`#${this.id} .val`).removeClass('btn-warning');
+          $(`#${this.id} .val`).removeClass('btn-danger');
+          $(`#${this.id} .val`).removeClass('btn-dark');
           $(`#${this.id} .val`).attr('disabled', 'true');
           $(`#${this.id} .val`).css('border', '0px');
           $(`#${this.id} .val-${this.val}`).addClass('btn-warning');
+          if (this.val === 'JR') {
+            $(`#${this.id} .val-${this.val}`).addClass('btn-danger');
+          } else if (this.val === 'JB') {
+            $(`#${this.id} .val-${this.val}`).addClass('btn-dark');
+          }
 
           const deck = DECK;
           console.log(this.val);
