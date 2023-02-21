@@ -122,7 +122,7 @@
     <script type="text/javascript">
 
       const SUITS = ['heart', 'diamond', 'club', 'spade'];
-      const VALS = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2'];
+      const VALS = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'JR', 'JB'];
 
       const DECKS = [
         {
@@ -137,6 +137,9 @@
             `<p><a href="https://mikegagnon.github.io/gluon/">Gluon Spoiler online book</a></p>
             `,
           cards: {
+            'joker': {
+
+            },
             'spade': {
               'A': {
                 filenames: [],
@@ -274,6 +277,19 @@
             <a href="https://www.youtube.com/channel/UCweluNl5hyW25RZvmzgADkw">@superhumansofboulder510</a>
             `,
           cards: {
+            'joker' : {
+              'JR' : {
+                filenames: [],
+                tophtml: `<h1 class="display-5 fw-bold">Red Joker</h1>
+                <h3>Gluon Spoiler trailer</h3>
+                <div style="text-align: left">
+                <p>A trailer for my online book, <a href="https://mikegagnon.github.io/gluon/index.html">Gluon Spoiler</a>:</p>
+                </div>
+                `,
+                bottomhtml: `
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/2tBC-aHbeHg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
+              },
+            },
             'heart': {
               '2': {
                 filenames: [],
@@ -594,12 +610,23 @@
             <button type="button" class="val val-3 btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 3)">3</button>
             <button type="button" class="val val-2 btn btn-warning btn-lg px-4 gap-3" onclick="valClick(${this.n}, 2)">2</button>
           </p>
+          <p>
+            <button type="button" class="val val-JR btn btn-danger btn-lg px-4 gap-3" onclick="valClick(${this.n}, 'JR')">Joker</button>
+            <button type="button" class="val val-JB btn btn-dark btn-lg px-4 gap-3" onclick="valClick(${this.n}, 'JB')">Joker</button>
+          </p>
         </div>`);
 
           const deck = DECK;
           for (const val of VALS) {
             if (!(val in deck.cards[this.suit])) {
-              this.disableVal(val);
+              if ((val === 'JR' || val === 'JB')) {
+                if (!(val in deck.cards['joker'])) {
+                  this.disableVal(val);
+                }
+                // pass
+              } else {
+                this.disableVal(val);
+              }
             } 
           }
         }
@@ -607,12 +634,18 @@
         disableVal(val) {
           $(`#${this.id} .val-${val}`).attr('disabled', true);
           $(`#${this.id} .val-${val}`).removeClass('btn-warning');
+          $(`#${this.id} .val-${val}`).removeClass('btn-danger');
+          $(`#${this.id} .val-${val}`).removeClass('btn-dark');
           $(`#${this.id} .val-${val}`).css('border', '0px');
 
         }
 
         valClick(val) {
           this.val = val;
+          let suit = this.suit;
+          if (this.val === 'JR' || this.val === 'JB') {
+            suit = 'joker';
+          }
 
           $(`#${this.id} .val`).removeClass('btn-warning');
           $(`#${this.id} .val`).attr('disabled', 'true');
@@ -621,7 +654,7 @@
 
           const deck = DECK;
           console.log(this.val);
-          const c = deck.cards[this.suit][this.val];
+          const c = deck.cards[suit][this.val];
           
           $(`#${this.id}`).append(c.tophtml);
           const mar = "15px;"
