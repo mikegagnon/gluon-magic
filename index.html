@@ -1093,7 +1093,8 @@
           $(`#cards-${DECK_I}`).append(`
 
       <div class="not-init" id="${this.id}">
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <div">
+        <center><div style="margin-bottom: 10px;" class="select-suit-words highlight">Select a suit:</div></center>
           <p>
             <button type="button" class="suit suit-heart btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'heart')">♥</button>
             <button type="button" class="suit suit-diamond btn btn-danger btn-lg px-4 gap-3" onclick="suitClick(${this.n}, 'diamond')">♦</button>
@@ -1124,6 +1125,7 @@
 
         suitClick(suit) {
           this.suit = suit;
+          $(".select-suit-words").removeClass('highlight');
           $(`#${this.id} .suit`).removeClass('btn-danger');
           $(`#${this.id} .suit`).removeClass('btn-dark');
           $(`#${this.id} .suit`).attr('disabled', 'true');
