@@ -265,19 +265,47 @@
         },
         {
           n: 1,
-          id: 'gentle',
-          deckTop: `<h1>The Gentle Way of War</h1>`,
+          id: 'theory11',
+          deckTop: `<h1>Theory 11</h1>`,
           cardbottomhtml: `
-            <p><a href="https://www.dropbox.com/s/lpy47qsf7xo1pi2/gentle.pdf?dl=0">PDF</a></p>
-            <p><a href="https://www.lulu.com/shop/magner-redick/the-gentle-way-of-war/paperback/product-4g84q4.html">Paperback</a> $11</p>
+            <a href="https://www.youtube.com/channel/UCGPK6bqoOVkonz4cYpo3qBA">@mikegagnon3155</a><br>
+            <a href="https://www.youtube.com/channel/UCvTCjYxkKlQNVwh8linImZQ">@alskdjflaksjdflkjsdf</a><br>
+            <a href="https://www.youtube.com/channel/UClabGotXJjKeJdwhOlMI9lA">@zipinsley7365</a><br>
+            <a href="https://www.youtube.com/channel/UCweluNl5hyW25RZvmzgADkw">@superhumansofboulder510</a>
             `,
           cards: {
             'heart': {
-              'A': {
-                filenames: ['trimmed/gentle-005.jpg', 'trimmed/gentle-006.jpg'],
-                tophtml: `<h1 class="display-5 fw-bold">Ace of hearts</h1>`,
-                bottomhtml: ``,
+              '2': {
+                filenames: [],
+                tophtml: `<h1 class="display-5 fw-bold">2 of hearts</h1>
+                <h3>Pink cloud crier 2</h3>
+                <div style="text-align: left">
+                <p>In Alcoholics Anonymous, the "pink cloud" is slang for a temporary blissful experience that sometimes comes along with an inspiring personal commitment to sobriety.</a>
+
+                <p>I recorded this video spontaneously during a pink cloud event.</p>
+
+                <p>This is the sequel to "Pink cloud crier" (10 of hearts).</p>
+                </div>
+                `,
+                bottomhtml: `
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/cpF9z0BrMxo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
+              },
+              '10': {
+                filenames: [],
+                tophtml: `<h1 class="display-5 fw-bold">10 of hearts</h1>
+                <h3>Pink cloud crier</h3>
+                <div style="text-align: left">
+                <p>In Alcoholics Anonymous, the "pink cloud" is slang for a temporary blissful experience that sometimes comes along with an inspiring personal commitment to sobriety.</a>
+
+                <p>I recorded this video spontaneously during a pink cloud event.</p>
+
+                <p>This is the prequel to "Pink cloud crier 2" (2 of hearts).</p>
+                </div>
+                `,
+                bottomhtml: `
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/xil6Nk1dnKg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
               }
+
             }
           }
         }
@@ -320,7 +348,7 @@
           <div id="decks-${deckI}" class="not-init">
             ${divider}
             <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(0)">Gluon Spoiler</button></p>
-            <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(1)">Gentle Way of War</button></p>
+            <p><button type="button" class="deck btn btn-primary btn-lg px-4 gap-3" onclick="deckClick(1)">Theory 11</button></p>
           </div>
           <div id="deckTop-${deckI}" class="not-init">
           </div>
