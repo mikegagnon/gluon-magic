@@ -99,9 +99,11 @@
             <p><button type="button" class="btn btn-outline-primary btn-lg px-4 gap-3" onclick="codeClick('index')">Index of all cards</button></p>
           </div>
 
-          <div id="index-wrapper" class='code-wrapper' style="display: none">
-          <h1>Index</h1>
-          <div id="index"></div>
+          <div id="foo">
+            <div id="index-wrapper" class='code-wrapper' style="display: none">
+            <h1>Index</h1>
+            <div id="index"></div>
+            </div>
           </div>
 
           <div id="my-topic" class='code-wrapper' style="display: none">
@@ -194,43 +196,9 @@
             $("#my-topic-index").append(entry);
           }
 
-        /*for (const suit of SUITS) {
-          for (const val of VALS) {
-            if (val === 'JR' || val === 'JB') {
-              continue;
-            }
-
-
-
-            let color = 'danger';
-            if (suit === 'club' || suit === 'spade') {
-              color = 'dark';
-            }
-
-            let disabled = ''
-            let name;
-            if (!(val in DECK.cards[suit])) {
-              disabled = 'disabled';
-              name = '';
-            } else {
-              name = DECK.cards[suit][val].name;
-            }
-
-            const text = name;
-
-
-            const button = `
-              <button type="button" class="suit suit-club btn btn-${color} btn-sm px-4 gap-3" onclick="cardClick('${suit}', '${val}')" ${disabled}>${UNI[suit]} ${val}</button>
-            `
-            const entry = `
-
-              <p>${button} ${text}</p>
-
-            `;
-
-            $("#index").append(entry);
-          }
-        }*/
+          $([document.documentElement, document.body]).animate({
+            scrollTop: $(`#foo`).offset().top
+          }, 300);
 
         }
       }
@@ -399,6 +367,11 @@
             <br><br><br>
             `,
           topics: [
+            {
+              id: 'poetry',
+              name: 'Poetry readings',
+              cards: [['spade', 'A']]
+            },
             {
               id: 'hacking',
               name: 'Hacking cards',
