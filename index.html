@@ -144,6 +144,9 @@
         $(".code-wrapper").css('display', 'none');
         if (code === 'index') {
           $("#index-wrapper").css('display', 'block');
+          $([document.documentElement, document.body]).animate({
+            scrollTop: $(`#foo`).offset().top
+          }, 300);
         } else {
           let topic;
           for (const t of DECK.topics) {
