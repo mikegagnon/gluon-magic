@@ -94,6 +94,8 @@
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">See also: <a href="https://mikegagnon.github.io/gluon">Gluon Spoiler</a></p>
 
+      <div id="code"></div>
+
       <div id="workspace"></div>
       <!--<div class="b-example-divider" style="margin-bottom: 40px; margin-top: 40px;"></div>-->
 
@@ -122,6 +124,7 @@
     
     <script type="text/javascript">
 
+      let CODE = false;
       const SUITS = ['heart', 'diamond', 'club', 'spade'];
       const VALS = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'JR', 'JB'];
 
@@ -1010,9 +1013,12 @@
       let CARDS;
       let URL_PARTS;
 
+      const url = window.location.href.replace('code', '');
+      console.log(url)
+
       // https://davidshimjs.github.io/qrcodejs/
       const QRCODE = new QRCode("myqrcode", {
-          text: window.location.href,
+          text: url,
           width: 256,
           height: 256,
           colorDark : "#000000",
@@ -1253,7 +1259,6 @@
         //window.location.href = newUrl;
         //window.history.pushState("object or string", "Title", "/new-url");
         window.history.pushState({}, '', newUrl);
-
         QRCODE.clear(); // clear the code.
         QRCODE.makeCode(newUrl);
       }
@@ -1396,7 +1401,13 @@
       }
 
       function parseUrl(i) {
-          const params = window.location.href.slice(i + 1).split('&');
+          const raw = window.location.href;
+          if (raw.includes('code')) {
+            CODE = true;
+          }
+          const sanscode = raw.replace('code', '');
+
+          const params = sanscode.slice(i + 1).split('&');
           if (params.length !== 1) {
             console.log('params.length !== 1=== ', params.length);
             return;
@@ -1406,12 +1417,14 @@
           let deckI = 0;
           let cardI = 0;
 
+
+
           while (parts.length > 0) {
             [parts, cardI] = loadDeck(parts, deckI, cardI);
             deckI++;
           }
 
-          return parts.length
+          return parts.length;
       }
 
 
@@ -1436,6 +1449,12 @@
         DECK_I = 0;
         drawDeckSelector(DECK_I);
         const partsLength = main();
+
+        const CODE_HTML = `Hi`;
+
+        if (CODE) {
+          $("#code").append(CODE_HTML);
+        }
 
         if (DECKS.length === 1 && partsLength < 0) {
           deckClick(0);
