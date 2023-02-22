@@ -94,7 +94,7 @@
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">See also: <a href="https://mikegagnon.github.io/gluon">Gluon Spoiler</a></p>
 
-      <div id="code" style="display: none">
+      <div id="code" style="display: none; text-align: left;">
           <h1>Index</h1>
           <div id="index"></div>
           <h1>Card selector</h1>
@@ -294,6 +294,7 @@
           cards: {
             'joker' : {
               'JR' : {
+                name: 'Gluon Spoiler trailer',
                 filenames: [],
                 tophtml: `<h1 class="display-5 fw-bold">Red Joker</h1>
                 <h3>Gluon Spoiler trailer</h3>
@@ -305,6 +306,7 @@
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/2tBC-aHbeHg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
               },
               'JB' : {
+                name: 'TimeCop 1983 UFO',
                 filenames: [],
                 tophtml: `<h1 class="display-5 fw-bold">Black Joker</h1>
                 <h3>TimeCop 1983 UFO</h3>
@@ -317,6 +319,7 @@
             },
             'heart': {
               '2': {
+                name: 'Pink cloud crier 2',
                 filenames: [],
                 tophtml: `<h1 class="display-5 fw-bold">2 of hearts</h1>
                 <h3>Pink cloud crier 2</h3>
@@ -456,6 +459,7 @@
                 bottomhtml: `<iframe width="560" height="315" src="https://www.youtube.com/embed/u9BPiDI0UrA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`,
               },
               'A': {
+                name: 'Raska Lullaby',
                 filenames: [],
                 tophtml: `<h1 class="display-5 fw-bold">Ace of hearts</h1>
                 <h3>Raska Lullaby</h3>
@@ -1457,16 +1461,31 @@
               continue;
             }
 
+
+
             let color = 'danger';
             if (suit === 'club' || suit === 'spade') {
               color = 'dark';
             }
+
+            let disabled = ''
+            let name;
+            if (!(val in DECK.cards[suit])) {
+              disabled = 'disabled';
+              name = '';
+            } else {
+              name = DECK.cards[suit][val].name;
+            }
+
+            const text = name;
+
+
             const button = `
-              <button type="button" class="suit suit-club btn btn-${color} btn-lg px-4 gap-3" onclick="cardClick('${suit}', '${val}')">${UNI[suit]} ${val}</button>
+              <button type="button" class="suit suit-club btn btn-${color} btn-sm px-4 gap-3" onclick="cardClick('${suit}', '${val}')" ${disabled}>${UNI[suit]} ${val}</button>
             `
             const entry = `
 
-              <p>${button}</p>
+              <p>${button} ${text}</p>
 
             `
             $("#index").append(entry);
