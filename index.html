@@ -162,9 +162,75 @@
           $("#my-topic").css('display', 'block');
 
 
+          for (const card of topic.cards) {
+            const [suit, val] = card;
+
+            let color = 'danger';
+            if (suit === 'club' || suit === 'spade') {
+              color = 'dark';
+            }
+
+            let disabled = ''
+            let name;
+            if (!(val in DECK.cards[suit])) {
+              disabled = 'disabled';
+              name = '';
+            } else {
+              name = DECK.cards[suit][val].name;
+            }
+
+            const text = name;
+
+
+            const button = `
+              <button type="button" class="suit suit-club btn btn-${color} btn-sm px-4 gap-3" onclick="cardClick('${suit}', '${val}')" ${disabled}>${UNI[suit]} ${val}</button>
+            `
+            const entry = `
+
+              <p>${button} ${text}</p>
+
+            `;
+
+            $("#my-topic-index").append(entry);
+          }
+
+        /*for (const suit of SUITS) {
+          for (const val of VALS) {
+            if (val === 'JR' || val === 'JB') {
+              continue;
+            }
 
 
 
+            let color = 'danger';
+            if (suit === 'club' || suit === 'spade') {
+              color = 'dark';
+            }
+
+            let disabled = ''
+            let name;
+            if (!(val in DECK.cards[suit])) {
+              disabled = 'disabled';
+              name = '';
+            } else {
+              name = DECK.cards[suit][val].name;
+            }
+
+            const text = name;
+
+
+            const button = `
+              <button type="button" class="suit suit-club btn btn-${color} btn-sm px-4 gap-3" onclick="cardClick('${suit}', '${val}')" ${disabled}>${UNI[suit]} ${val}</button>
+            `
+            const entry = `
+
+              <p>${button} ${text}</p>
+
+            `;
+
+            $("#index").append(entry);
+          }
+        }*/
 
         }
       }
@@ -336,7 +402,7 @@
             {
               id: 'hacking',
               name: 'Hacking cards',
-              cards: [['heart', 'A'], ['spade', 10]]
+              cards: [['heart', 'A'], ['spade', 2]]
             },
           ],
           cards: {
