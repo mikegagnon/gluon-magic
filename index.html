@@ -103,6 +103,9 @@
           <h1>Index</h1>
           <div id="index"></div>
           </div>
+
+          <div id="my-topic" class='code-wrapper' style="display: none">
+          </div>
           
           <h1 id="code-h1" style="display: none">Card selector</h1>
       </div>
@@ -139,6 +142,30 @@
         $(".code-wrapper").css('display', 'none');
         if (code === 'index') {
           $("#index-wrapper").css('display', 'block');
+        } else {
+          let topic;
+          for (const t of DECK.topics) {
+            if (t.id === code) {
+              topic = t;
+            }
+          }
+
+          console.log(topic);
+
+          $("#my-topic").html(`
+            <div id="my-topic" class='code-wrapper'>
+              <h1>${topic.name}</h1>
+              <div id="my-topic-index"></div>
+            </div>
+          `);
+
+          $("#my-topic").css('display', 'block');
+
+
+
+
+
+
         }
       }
 
