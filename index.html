@@ -303,6 +303,12 @@
             <a href="https://www.youtube.com/channel/UCweluNl5hyW25RZvmzgADkw">@superhumansofboulder510</a>
             <br><br><br>
             `,
+          topics: {
+            'hacking': {
+              name: 'Hacking cards',
+              cards: [['heart', 'A'], ['spade', 10]]
+            }
+          },
           cards: {
             'joker' : {
               'JR' : {
@@ -1375,6 +1381,18 @@
             $(`#deckTop-${DECK_I}`).append(DECK.deckTop);
           }
 
+          if (CODE) {
+            $("#code").css('display', 'block');
+            makeIndex();
+            //makeTopics();
+          }
+
+        // function makeTopics() {
+        //   for (topic of DECK.topics) {
+        //     console.log(topic);ddd
+        //   }
+        // }
+
       }
 
       function suitClick(n, suit, noUpdateUrl) {
@@ -1531,6 +1549,8 @@
       setBase();
 
       function makeIndex() {
+        $("#index").html('');
+
         for (const suit of SUITS) {
           for (const val of VALS) {
             if (val === 'JR' || val === 'JB') {
@@ -1563,11 +1583,14 @@
 
               <p>${button} ${text}</p>
 
-            `
+            `;
+
             $("#index").append(entry);
           }
         }
       }
+
+      
 
       function initialize() {
         console.log('initialize');
@@ -1579,12 +1602,8 @@
         drawDeckSelector(DECK_I);
         const partsLength = main();
 
-        const CODE_HTML = `Hi`;
 
-        if (CODE) {
-          $("#code").css('display', 'block');
-          makeIndex();
-        }
+
 
         if (DECKS.length === 1 && partsLength < 0) {
           deckClick(0);
