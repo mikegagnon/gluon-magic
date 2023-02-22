@@ -1385,7 +1385,11 @@
         const n = CARDS.length - 1;
         suitClick(n, suit);
         valClick(n, val);
-        document.getElementById(`card-selector-${n}`).scrollIntoView();
+        //document.getElementById(`card-selector-${n}`).scrollIntoView();
+        //$(`card-selector-${n} h3`).scrollTop();
+        $([document.documentElement, document.body]).animate({
+          scrollTop: $(`#card-selector-${n} h1`).offset().top
+        }, 2000);
       }
 
       function endDeck(n, noUpdateUrl) {
