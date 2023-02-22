@@ -1188,6 +1188,7 @@
 
         }
 
+
         suitClick(suit) {
           this.suit = suit;
           $(".select-suit-words").removeClass('highlight');
@@ -1277,7 +1278,7 @@
           const deck = DECK;
           console.log(this.val);
           const c = deck.cards[suit][this.val];
-          
+          console.log('foo', this.id);
           $(`#${this.id}`).append(c.tophtml);
           const mar = "15px;"
 
@@ -1295,6 +1296,8 @@
 
 
         }
+
+
 
         endDeck() {
           $(`.end-btn`).css('border', '0px');
@@ -1376,6 +1379,13 @@
         if (!noUpdateUrl) {
           updateUrl();
         }
+      }
+
+      function cardClick(suit, val) {
+        const n = CARDS.length - 1;
+        suitClick(n, suit);
+        valClick(n, val);
+        document.getElementById(`card-selector-${n}`).scrollIntoView();
       }
 
       function endDeck(n, noUpdateUrl) {
