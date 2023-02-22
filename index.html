@@ -173,7 +173,14 @@
             let color = 'danger';
             if (suit === 'club' || suit === 'spade') {
               color = 'dark';
+            } else if (suit === 'joker') {
+              if (val === 'JB') {
+                color = 'dark';
+              } else {
+                color = 'danger';
+              }
             }
+
 
             let disabled = ''
             let name;
@@ -186,9 +193,13 @@
 
             const text = name;
 
+            let bname = `${UNI[suit]} ${val}`;
+            if (val === 'JB' || val === 'JR') {
+              bname = "Joker";
+            }
 
             const button = `
-              <button type="button" class="suit suit-club btn btn-${color} btn-sm px-4 gap-3" onclick="cardClick('${suit}', '${val}')" ${disabled}>${UNI[suit]} ${val}</button>
+              <button type="button" class="suit suit-club btn btn-${color} btn-sm px-4 gap-3" onclick="cardClick('${suit}', '${val}')" ${disabled}>${bname}</button>
             `
             const entry = `
 
@@ -403,7 +414,7 @@
             {
               id: 'et',
               name: 'ET\'s',
-              cards: [['joker', 'JB']]
+              cards: [['joker', 'JB'], ['joker', 'JR']]
             }
           ],
           cards: {
@@ -1733,7 +1744,7 @@
             `;
 
             $("#index").append(entry);
-      }
+        }
       }
 
       
