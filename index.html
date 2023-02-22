@@ -94,7 +94,11 @@
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">See also: <a href="https://mikegagnon.github.io/gluon">Gluon Spoiler</a></p>
 
-      <div id="code"></div>
+      <div id="code" style="display: none">
+          <h1>Index</h1>
+          <div id="index"></div>
+          <h1>Card selector</h1>
+      </div>
 
       <div id="workspace"></div>
       <!--<div class="b-example-divider" style="margin-bottom: 40px; margin-top: 40px;"></div>-->
@@ -127,6 +131,12 @@
       let CODE = false;
       const SUITS = ['heart', 'diamond', 'club', 'spade'];
       const VALS = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'JR', 'JB'];
+      const UNI = {
+        'heart': '♥',
+        'diamond': '♦',
+        'club': '♣',
+        'spade': '♠'
+      };
 
       const DECKS = [
         /*{
@@ -1440,6 +1450,30 @@
 
       setBase();
 
+      function makeIndex() {
+        for (const suit of SUITS) {
+          for (const val of VALS) {
+            if (val === 'JR' || val === 'JB') {
+              continue;
+            }
+
+            let color = 'danger';
+            if (suit === 'club' || suit === 'spade') {
+              color = 'dark';
+            }
+            const button = `
+              <button type="button" class="suit suit-club btn btn-${color} btn-lg px-4 gap-3" onclick="cardClick('${suit}', '${val}')">${UNI[suit]} ${val}</button>
+            `
+            const entry = `
+
+              <p>${button}</p>
+
+            `
+            $("#index").append(entry);
+          }
+        }
+      }
+
       function initialize() {
         console.log('initialize');
         $(".not-init").remove();
@@ -1453,7 +1487,8 @@
         const CODE_HTML = `Hi`;
 
         if (CODE) {
-          $("#code").append(CODE_HTML);
+          $("#code").css('display', 'block');
+          makeIndex();
         }
 
         if (DECKS.length === 1 && partsLength < 0) {
