@@ -1320,8 +1320,13 @@
 
         //window.location.href = newUrl;
         //window.history.pushState("object or string", "Title", "/new-url");
-        window.history.pushState({}, '', newUrl);
+        let newUrlWithCode = newUrl;
+        if (CODE) {
+          newUrlWithCode += 'code';
+        }
+        window.history.pushState({}, '', newUrlWithCode);
         QRCODE.clear(); // clear the code.
+        console.log('newUrl', newUrl);
         QRCODE.makeCode(newUrl);
       }
 
