@@ -95,9 +95,14 @@
       <p class="lead mb-4">See also: <a href="https://mikegagnon.github.io/gluon">Gluon Spoiler</a></p>
 
       <div id="code" style="display: none; text-align: left;">
+          <p><button type="button" class="deck btn btn-outline-primary btn-lg px-4 gap-3" onclick="codeClick('index')">Index of all cards</button></p>
+
+          <div id="index-wrapper" class='code-wrapper' style="display: none">
           <h1>Index</h1>
           <div id="index"></div>
-          <h1>Card selector</h1>
+          </div>
+          
+          <h1 id="code-h1" style="display: none">Card selector</h1>
       </div>
 
       <div id="workspace"></div>
@@ -127,6 +132,13 @@
     
     
     <script type="text/javascript">
+
+      function codeClick(code) {
+        $(".code-wrapper").css('display', 'none');
+        if (code === 'index') {
+          $("#index-wrapper").css('display', 'block');
+        }
+      }
 
       let CODE = false;
       const SUITS = ['heart', 'diamond', 'club', 'spade'];
