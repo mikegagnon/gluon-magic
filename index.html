@@ -1479,7 +1479,7 @@
           const cardN = CARDS.length;
           const cardSelector = new CardSelector(cardN);
 
-
+          
         }
 
 
@@ -1576,6 +1576,11 @@
 
         if (!noUpdateUrl) {
           updateUrl();
+
+          $([document.documentElement, document.body]).animate({
+            scrollTop: $(`#${card.id} h1`).offset().top
+          }, 300);
+          console.log("asdf ", `#${card.id} h1`)
         }
       }
 
