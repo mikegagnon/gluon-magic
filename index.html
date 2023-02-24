@@ -87,18 +87,32 @@
 /* https://blog.avada.io/css/button-click-effects      */
 .bubbly-button {
   transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+  -webkit-transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    -moz-transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    -ms-transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    -o-transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
 }
 .bubbly-button:before, .bubbly-button:after {
   transition: all ease-in-out 0.5s;
-  background-repeat: no-repeat;
+
+  -webkit-transition: all ease-in-out 0.5s;
+    -moz-transition: all ease-in-out 0.5s;
+    -ms-transition: all ease-in-out 0.5s;
+    -o-transition: all ease-in-out 0.5s;
 }
 .bubbly-button:before {
-  display: none;
   transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    -moz-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    -o-transform: scale(1.0);
 }
 .bubbly-button:after {
-  display: none;
   transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    -moz-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    -o-transform: scale(1.0);
 
 }
 .bubbly-button:active {
